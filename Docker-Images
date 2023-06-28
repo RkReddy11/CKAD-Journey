@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y <dependency>: Runs commands to update t
 CMD ["python", "app.py"]: Defines the command to run when the container starts. In this example, it runs the app.py file using the Python interpreter.
 This is a basic example of a Dockerfile, demonstrating how to build a Docker image based on an Ubuntu base image, copy files into the container, install dependencies, and specify the command to run.
 
-
+docker build -t myapp:latest .
 
 
 
