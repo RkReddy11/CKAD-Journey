@@ -1,0 +1,8 @@
+The docker ps command is used to list the running containers on your Docker host.
+
+Explanation:
+
+docker ps is a command used to list the running Docker containers.
+By default, it displays the running containers' essential information, such as their Container ID, Image, Command, Created time, Status, and Names.
+It only shows the running containers by default, excluding the stopped or exited containers.
+This command provides a quick overview of the containers currently active on your Docker host.
