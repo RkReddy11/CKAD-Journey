@@ -1,0 +1,31 @@
+The docker run command is used to create and start a new container based on a Docker image.
+
+Syntex:
+         docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Explanation:
+
+docker run: This is the basic command to run a Docker container.
+[OPTIONS]: These are optional flags that you can provide to customize the container's behavior. Some common options include:
+-d or --detach: Run the container in the background (detached mode).
+-p or --publish: Publish container ports to the host.
+-v or --volume: Mount a directory or file from the host into the container.
+--name: Assign a name to the container.
+-e or --env: Set environment variables inside the container.
+IMAGE: Specifies the Docker image to use for creating the container. It can be an image name, a repository name, or an image ID.
+[COMMAND] [ARG...]: Represents the command or executable to run inside the container, along with any arguments.
+
+Example:
+
+    docker run -d -p 8080:80 --name mycontainer nginx
+
+In this example:
+
+-d runs the container in the background (detached mode).
+-p 8080:80 maps port 8080 on the host to port 80 inside the container, allowing access to the container's web server.
+--name mycontainer assigns the name "mycontainer" to the running container.
+nginx specifies the Docker image to use, in this case, the official Nginx image.
+
+This command would create a new container based on the Nginx image,run it in the background, and map the container's port 80 to the host's port 8080.
+As a result, you can access the Nginx web server running inside the container by accessing http://localhost:8080 on your host machine.
+
