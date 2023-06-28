@@ -17,3 +17,8 @@ If you want to remove only the stopped containers, you can use the following com
 docker container prune
 
 This command will remove all stopped containers, freeing up resources on your Docker host.
+
+Command to delete all the docker images in the docker host
+
+docker rmi -f $(docker images -aq)
+
