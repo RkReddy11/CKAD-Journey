@@ -1,0 +1,19 @@
+To remove all running and stopped containers in Docker, you can use the following command:
+
+docker rm -f $(docker ps -aq)
+
+Explanation:
+
+docker ps -aq lists all containers (both running and stopped) and outputs only their container IDs (-q flag for quiet mode).
+docker rm removes one or more containers.
+The command $(docker ps -aq) is used to pass the container IDs as arguments to docker rm.
+The -f flag forces the removal of running containers.
+By executing this command, all containers, including running and stopped ones, will be forcefully removed from your Docker host.
+
+Please note that removing containers will permanently delete them, and any data or changes made inside the containers will be lost. Be cautious while using this command, as it removes all containers without confirmation.
+
+If you want to remove only the stopped containers, you can use the following command:
+
+docker container prune
+
+This command will remove all stopped containers, freeing up resources on your Docker host.
