@@ -1,0 +1,22 @@
+The docker stop command is used to gracefully stop a running Docker container. Here's a short and crisp explanation of the docker stop command:
+
+Explanation:
+
+docker stop is used to stop a running Docker container.
+It sends a signal to the container's main process, requesting it to terminate gracefully.
+By default, it allows a container 10 seconds to shut down gracefully before forcefully terminating it.
+Stopping a container allows it to perform cleanup tasks, save state, and gracefully terminate any processes running inside it.
+
+Syntax:
+
+docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+Example:
+
+docker stop mycontainer
+
+In this example:
+
+mycontainer represents the name or ID of the container to be stopped.
+The command docker stop mycontainer will send a stop signal to the specified container, allowing it to shut down gracefully.
+Please note that stopping a container does not remove it. To remove a stopped container, you can use the docker rm command.
