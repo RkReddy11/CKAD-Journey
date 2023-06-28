@@ -42,3 +42,31 @@ This feature is useful for persisting data or sharing files between the containe
 
 Please make sure to provide the correct paths for the local directory and the container directory according to your specific setup.
 
+Docker Run Flags:
+
+-d or --detach: Runs the container in the background (detached mode), allowing you to continue using the terminal.
+Example: docker run -d nginx
+
+-p or --publish: Publishes container ports to the host, allowing external access to the container's network ports.
+Example: docker run -p 8080:80 nginx
+This maps port 80 inside the container to port 8080 on the host.
+
+-v or --volume: Mounts a directory or file from the host into the container, providing persistent storage or file sharing.
+Example: docker run -v /path/on/host:/path/in/container nginx
+This mounts the /path/on/host directory from the host machine to the /path/in/container directory inside the container.
+
+--name: Assigns a name to the container for easy identification.
+Example: docker run --name mycontainer nginx
+
+-e or --env: Sets environment variables inside the container.
+Example: docker run -e VAR_NAME=value nginx
+This sets the environment variable VAR_NAME with the value value inside the container.
+
+--restart: Specifies the restart policy for the container, defining when and how the container should be restarted if it stops or fails.
+Example: docker run --restart=always nginx
+This sets the container to always restart if it stops or fails.
+
+-it: Allocates a pseudo-TTY and attaches the container's stdin, allowing an interactive session within the container.
+Example: docker run -it ubuntu bash
+This starts an interactive shell session inside the container.
+
