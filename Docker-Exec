@@ -1,0 +1,15 @@
+To get into a running container and run commands inside it, you can use the docker exec command. Here's how you can do it:
+
+Identify the name or ID of the running container you want to access. You can use the docker ps command to list the running containers and find the desired container.
+
+Once you have the container name or ID, use the following command to enter into the container's shell:
+
+docker exec -it <container_name_or_id> sh
+
+Replace <container_name_or_id> with the actual name or ID of the container.
+
+The -it flags allow you to interact with the container's shell and allocate a pseudo-TTY for the session. The sh command specifies the shell to be used, which is commonly available in many container images.
+
+After executing the above command, you will be inside the container's shell, where you can run commands as if you were working within the container. For example, you can execute commands like ls, pwd, or any other commands specific to the container's environment.
+
+To exit the container's shell and return to your host machine's shell, you can simply type exit.
