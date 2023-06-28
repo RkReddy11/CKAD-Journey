@@ -29,3 +29,16 @@ nginx specifies the Docker image to use, in this case, the official Nginx image.
 This command would create a new container based on the Nginx image,run it in the background, and map the container's port 80 to the host's port 8080.
 As a result, you can access the Nginx web server running inside the container by accessing http://localhost:8080 on your host machine.
 
+
+docker run -v /path/to/local/directory:/path/inside/container nginx:1.14-alpine
+
+In this example:
+
+-v /path/to/local/directory:/path/inside/container maps the /path/to/local/directory on your host machine to the /path/inside/container directory inside the container.
+nginx:1.14-alpine specifies the Docker image to use, in this case, the nginx image with the 1.14-alpine tag.
+With this volume mapping, any data written to the /path/to/local/directory on your host machine will be persisted and accessible from within the container at /path/inside/container. Similarly, any changes made to the directory inside the container will be reflected in the corresponding local directory on your host machine.
+
+This feature is useful for persisting data or sharing files between the container and the host system.
+
+Please make sure to provide the correct paths for the local directory and the container directory according to your specific setup.
+
