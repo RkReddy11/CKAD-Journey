@@ -1,0 +1,48 @@
+The major difference between CMD and ENTRYPOINT in Docker lies in how they handle command-line arguments and whether they can be overridden.
+
+CMD:
+
+The CMD instruction specifies the default command and/or parameters that are used when running a container.
+It can be overridden by passing command-line arguments to the docker run command.
+Only the last CMD instruction in the Dockerfile is effective.
+If CMD is specified with an executable, it can be replaced with a different executable at runtime.
+Example: CMD ["python", "app.py", "--option", "value"]
+
+
+ENTRYPOINT:
+
+The ENTRYPOINT instruction specifies the executable that will be run when a container is started.
+It provides a fixed command that cannot be easily overridden.
+Command-line arguments provided during the docker run command are appended to the ENTRYPOINT command.
+Multiple ENTRYPOINT instructions can be specified, but only the last one takes effect.
+If ENTRYPOINT is specified with an executable, it cannot be easily replaced at runtime.
+Example: ENTRYPOINT ["python", "app.py"]
+
+
+Here's an example to illustrate the difference:
+
+Let's assume the Dockerfile contains the following CMD and ENTRYPOINT instructions:
+
+
+CMD ["python", "app.py", "--mode", "default"]
+ENTRYPOINT ["echo", "Hello,"]
+
+
+If you run the container without specifying any additional arguments:
+
+docker run myapp
+
+
+With CMD, the container will execute the app.py script in the default mode specified in the CMD instruction.
+
+With ENTRYPOINT, the container will print "Hello," as specified in the ENTRYPOINT instruction.
+
+Now, if you run the container and provide additional arguments:
+
+docker run myapp --mode custom
+
+
+With CMD, the additional --mode custom argument will override the default mode specified in the CMD instruction. The container will execute the app.py script in the custom mode.
+
+With ENTRYPOINT, the additional --mode custom argument will be appended to the ENTRYPOINT command. The container will print "Hello," and the additional argument will be passed along.
+
