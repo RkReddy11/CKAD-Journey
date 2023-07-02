@@ -1,0 +1,55 @@
+Docker Compose is a tool that allows you to define and run multi-container Docker applications. It simplifies the process of managing and coordinating multiple Docker containers, making it easier to deploy and scale complex applications.
+
+With Docker Compose, you can define your application's services, networks, and volumes in a YAML file called docker-compose.yml. This file describes the configuration of your containers and their relationships, allowing you to specify things like which images to use, environment variables, ports to expose, and more.
+
+Here's an example to help you understand Docker Compose better:
+
+Let's say you have a web application that consists of two services: a web server running a Python Flask application and a PostgreSQL database. You want to run both services together using Docker Compose.
+
+Create a new directory for your project and navigate to it.
+Create a new file named docker-compose.yml and open it in a text editor.
+Define the services in the YAML file:
+
+version: '3'
+services:
+  web:
+    build: ./web
+    ports:
+      - '5000:5000'
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+In this example, we have two services: 'web' and 'db'. The 'web' service is built using a Dockerfile located in the './web' directory, which contains the necessary setup for the Flask application. Port 5000 is exposed on the host machine and mapped to port 5000 of the 'web' service.
+
+The 'db' service uses the latest PostgreSQL image from Docker Hub. It also sets environment variables for the username and password of the PostgreSQL database.
+
+Save the docker-compose.yml file
+Create a new directory named 'web' inside the project directory.
+Inside the 'web' directory, create a Dockerfile that specifies how to build the web service:
+
+Dockerfile
+
+FROM python:3.9
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD [ "python", "app.py" ]
+This Dockerfile uses the official Python 3.9 image as the base, sets the working directory, installs the Python dependencies from the requirements.txt file, copies the entire application code, and specifies the command to run the Flask application.
+
+Create an app.py file inside the 'web' directory with your Flask application code.
+
+Now, from the root of your project directory, run the following command:
+
+
+docker-compose up
+
+Docker Compose will read the docker-compose.yml file, build the necessary images, and start the containers. You should see the output of your Flask application and be able to access it at http://localhost:5000.
+
+That's a basic example of how you can use Docker Compose to define and run multiple containers as a single application. You can expand upon this example by adding more services, defining networks, and volumes, depending on your application's requirements.
+
+
