@@ -38,3 +38,19 @@ wp-mysql-network: This is the name of the network we're creating, which is "wp-m
 By running this command, Docker will create a new network named "wp-mysql-network" using the bridge driver. The network will have the subnet 182.18.0.0/24 allocated, with the gateway configured as 182.18.0.1. This network can be used for connecting containers and enabling communication between them.
 
 Please note that the specified subnet and gateway should be chosen carefully to avoid conflicts with other networks or IP addresses in your environment.
+
+To deploy a MySQL database using the mysql:5.6 image, name it mysql-db, and attach it to the wp-mysql-network network with the database password set to db_pass123, you can use the following command:
+
+docker run -d --name mysql-db --network wp-mysql-network -e MYSQL_ROOT_PASSWORD=db_pass123 mysql:5.6
+
+Let's break down the command:
+
+docker run: This command is used to run a Docker container.
+-d: It runs the container in the background (detached mode).
+--name mysql-db: This option sets the name of the container as mysql-db.
+--network wp-mysql-network: This option attaches the container to the wp-mysql-network network that was created earlier.
+-e MYSQL_ROOT_PASSWORD=db_pass123: This option sets the environment variable MYSQL_ROOT_PASSWORD to db_pass123, which is the password for the MySQL root user.
+mysql:5.6: This is the name and version tag of the Docker image to run. In this case, it's the official MySQL 5.6 image from Docker Hub.
+By running this command, Docker will pull the MySQL 5.6 image (if it's not already available locally), create a new container named mysql-db based on that image, attach it to the wp-mysql-network network, and set the root password to db_pass123. The container will be running in the background in detached mode.
+
+Now you have a MySQL database container named mysql-db connected to the wp-mysql-network network, ready for use with the specified root password.
