@@ -54,3 +54,23 @@ mysql:5.6: This is the name and version tag of the Docker image to run. In this 
 By running this command, Docker will pull the MySQL 5.6 image (if it's not already available locally), create a new container named mysql-db based on that image, attach it to the wp-mysql-network network, and set the root password to db_pass123. The container will be running in the background in detached mode.
 
 Now you have a MySQL database container named mysql-db connected to the wp-mysql-network network, ready for use with the specified root password.
+
+To deploy a web application named "webapp" using the kodekloud/simple-webapp-mysql image, exposing the port 38080 on the host, and linking it to the MySQL container, you can use the following command:
+
+docker run -d --name webapp --network wp-mysql-network -e DB_Host=mysql-db -e DB_Password=db_pass123 -p 38080:80 --link mysql-db:mysql kodekloud/simple-webapp-mysql
+
+Let's break down the command:
+
+docker run: This command is used to run a Docker container.
+-d: It runs the container in the background (detached mode).
+--name webapp: This option sets the name of the container as webapp.
+--network wp-mysql-network: This option attaches the container to the wp-mysql-network network that was created earlier.
+-e DB_Host=mysql-db -e DB_Password=db_pass123: These options set the environment variables DB_Host and DB_Password with the specified values. These variables are used by the web application to connect to the MySQL database.
+-p 38080:80: This option maps port 38080 on the host to port 80 in the container. This allows accessing the web application from the host machine using port 38080.
+--link mysql-db:mysql: This option links the mysql-db container (MySQL) to the webapp container, allowing them to communicate with each other. The linked container's information, such as IP address and environment variables, is made available to the webapp container.
+By running this command, Docker will pull the kodekloud/simple-webapp-mysql image (if it's not already available locally), create a new container named webapp based on that image, attach it to the wp-mysql-network network, set the required environment variables, and link it with the mysql-db container. The container will be running in the background in detached mode, and the web application will be accessible from the host machine at http://localhost:38080.
+
+Now you have a web application container named webapp connected to the wp-mysql-network network, with the required environment variables set and linked to the MySQL container.
+
+
+
