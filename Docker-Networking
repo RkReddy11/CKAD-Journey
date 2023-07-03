@@ -23,3 +23,18 @@ Containers can also communicate with external networks, such as the host network
 By default, containers are isolated from the host network. To enable communication with the host network, you can use port mapping to expose container ports to the host.
 For internet access, you can configure port mapping to expose container ports to the external network.
 Docker provides a flexible and scalable networking model that allows containers to connect and communicate with each other as well as with external networks. By leveraging Docker networks, you can easily build and manage interconnected containerized applications.
+
+
+To create a new network named "wp-mysql-network" using the bridge driver, allocate the subnet 182.18.0.1/24, and configure the gateway as 182.18.0.1, you can use the following command:
+
+docker network create --driver bridge --subnet 182.18.0.0/24 --gateway 182.18.0.1 wp-mysql-network
+Let's break down the command:
+
+docker network create: This command is used to create a new Docker network.
+--driver bridge: This option specifies the network driver to use. In this case, we're using the bridge driver, which is the default network driver.
+--subnet 182.18.0.0/24: This option specifies the subnet to allocate for the network. The subnet 182.18.0.0/24 provides a range of IP addresses from 182.18.0.1 to 182.18.0.254.
+--gateway 182.18.0.1: This option sets the gateway IP address for the network to 182.18.0.1.
+wp-mysql-network: This is the name of the network we're creating, which is "wp-mysql-network" in this case.
+By running this command, Docker will create a new network named "wp-mysql-network" using the bridge driver. The network will have the subnet 182.18.0.0/24 allocated, with the gateway configured as 182.18.0.1. This network can be used for connecting containers and enabling communication between them.
+
+Please note that the specified subnet and gateway should be chosen carefully to avoid conflicts with other networks or IP addresses in your environment.
