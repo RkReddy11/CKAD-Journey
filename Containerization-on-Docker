@@ -1,0 +1,38 @@
+Docker Images:
+
+A Docker image is a read-only template or blueprint that contains all the necessary files, libraries, and dependencies required to run an application.
+Docker images are built using a set of instructions called a Dockerfile. The Dockerfile specifies the base image, any additional software packages, environment variables, file copies, and other configuration steps needed for the application.
+The Dockerfile is processed by the Docker build command, which creates an image layer by layer, based on the instructions provided. Each layer represents a change or modification made to the image.
+Docker images can be built locally using the Docker Engine or pulled from a Docker Registry, such as Docker Hub.
+Docker Containers:
+
+A Docker container is a runnable instance of a Docker image. It is a lightweight and isolated environment that encapsulates the application and its dependencies.
+Containers are created from Docker images using the Docker run command. This command specifies the image to use, any additional configurations, networking, port mappings, and other runtime parameters.
+When a container is started, Docker Engine creates a writable layer called the container layer on top of the read-only layers from the image. Any changes made to the container, such as file modifications or data writes, are stored in this container layer, keeping the underlying image unchanged.
+Containers have their own isolated filesystem, network interface, and process space. They can have their own IP address and can communicate with other containers or the host system through networking.
+Docker Daemon and Client:
+
+The Docker daemon (dockerd) is the server-side component of Docker that manages and controls Docker objects. It listens for API requests from the Docker client and performs the requested operations.
+The Docker client (docker) is the command-line tool or API used to interact with the Docker daemon. It sends commands and requests to the daemon, which in turn processes them and communicates with the underlying Docker Engine.
+The Docker client can run on the same machine as the Docker daemon or on a different machine, communicating with the daemon over the network.
+Container Lifecycle Management:
+
+Docker Engine provides several commands and functionalities for managing the lifecycle of containers.
+The Docker run command creates and starts a container from an image.
+The Docker start, stop, and restart commands are used to manage the running state of containers.
+The Docker rm command removes a stopped container.
+Docker also supports container orchestration platforms like Docker Swarm and Kubernetes, which allow you to manage and scale containerized applications across multiple hosts or clusters.
+Container Isolation:
+
+Docker containers provide process-level isolation, meaning each container runs as a separate process with its own filesystem and resources.
+Containers share the host system's kernel, which makes them lightweight and more efficient than traditional virtual machines.
+Docker Engine uses various Linux kernel features like namespaces, control groups (cgroups), and container security techniques to provide isolation and resource management for containers.
+Namespaces ensure that each container has its own view of system resources, such as process IDs, network interfaces, filesystems, and user accounts.
+Control groups (cgroups) limit and allocate resources (CPU, memory, disk I/O, etc.) to containers, preventing one container from consuming excessive resources and impacting others.
+Docker Registry:
+
+Docker Registry is a central repository for storing and distributing Docker images.
+The default registry is Docker Hub, but you can also use private or third-party registries.
+Docker Engine can pull images from registries using the Docker pull command, and it can push images to registries for sharing.
+In summary, containerization in Docker involves building Docker images that contain all the necessary components of an application, and running those images as isolated containers using Docker Engine. Containers provide an encapsulated and portable runtime environment, managed by the Docker daemon and interacted with via the Docker client. Docker uses various kernel features for isolation and resource management, and images can be stored and shared through Docker Registries.
+
