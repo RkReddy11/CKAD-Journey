@@ -1,3 +1,25 @@
+Docker Engine is the core component of the Docker platform, which allows you to create, run, and manage containers. It provides a lightweight and efficient environment for isolating applications and their dependencies, enabling consistent behavior across different environments.
+
+The architecture of Docker Engine is based on a client-server model. Here are its key components:
+
+Docker Daemon: The Docker daemon, called dockerd, is the server-side component that manages Docker objects such as containers, images, networks, and volumes. It listens for Docker API requests, manages the container lifecycle, and handles resource management.
+
+Docker Client: The Docker client, called docker, is the command-line tool or API that users interact with to communicate with the Docker daemon. It sends commands to the daemon, which in turn performs the requested operations.
+
+Docker Objects: Docker Engine manages several objects, including containers, images, networks, and volumes.
+
+Containers: Containers are isolated and lightweight runtime environments that encapsulate an application and its dependencies. Docker Engine creates and runs containers based on Docker images.
+
+Images: Images are read-only templates used to create containers. They contain the necessary files, dependencies, and configurations needed to run an application.
+
+Networks: Docker Engine provides networking capabilities to allow containers to communicate with each other and with external systems. It creates and manages networks to isolate container communication.
+
+Volumes: Volumes are persistent storage entities that can be attached to containers. They allow data to be shared between containers and persist even if the container is stopped or removed.
+
+Docker Registry: Docker Registry is a central repository for storing and distributing Docker images. The default registry is Docker Hub, but you can also use private or third-party registries. Docker Engine can pull images from registries, and it can also push images to registries for sharing.
+
+The Docker Engine architecture enables easy creation, deployment, and management of applications using containers. It provides a standardized and consistent environment across different systems, making it easier to develop and run applications with predictable behavior.
+
 Docker Images:
 
 A Docker image is a read-only template or blueprint that contains all the necessary files, libraries, and dependencies required to run an application.
