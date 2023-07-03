@@ -1,0 +1,11 @@
+Docker Desktop for Windows: Docker Desktop is a full-featured desktop application that enables developers to build and run Docker containers on Windows and macOS. It includes a graphical user interface (GUI) and integrates with the Windows operating system, allowing you to easily manage containers and access Docker-related tools and services.
+
+Docker Toolbox: Docker Toolbox is an older option primarily aimed at Windows 7 and Windows 8 users, as Docker Desktop is not supported on these operating systems. It provides a command-line interface (CLI) and a legacy version of VirtualBox to run Docker containers on Windows.
+
+Windows Server Containers: Windows Server Containers allow you to run Windows-based containers on Windows Server operating systems. They provide a lightweight and isolated environment for running applications, making it easier to deploy and manage containerized applications on Windows Server.
+
+Azure Container Instances: Azure Container Instances (ACI) is a serverless container platform offered by Microsoft Azure. It allows you to run Docker containers without the need to manage the underlying infrastructure. ACI supports both Linux and Windows containers, making it suitable for running containers on Windows.
+
+Kubernetes on Windows: If you're interested in orchestrating and managing containerized applications at scale, you can use Kubernetes on Windows. Kubernetes is a popular container orchestration platform that can be installed and run on Windows Server 2019 or Windows 10 with the necessary feature updates.
+
+These are the main options for running Docker containers on Windows. Docker Desktop for Windows is the most widely used and feature-rich option, while the others cater to specific use cases or scenarios.
