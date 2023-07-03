@@ -1,0 +1,29 @@
+Docker registry is a central repository that stores Docker images. It serves as a place where you can upload, download, and manage Docker images for your applications.
+
+Here's a breakdown of the key points about Docker registries:
+
+Repository for Docker Images:
+
+A Docker registry acts as a repository or storage location for Docker images.
+An image is a lightweight standalone executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, and dependencies.
+Docker images are stored and organized within registries, which can be public or private.
+Public and Private Registries:
+
+Public registries, such as Docker Hub, are freely accessible and host a vast collection of pre-built Docker images shared by the Docker community.
+Private registries are used within organizations to store and distribute Docker images privately.
+Private registries offer control over image access, security, and versioning, allowing organizations to manage their own image repositories.
+Image Versioning and Tagging:
+
+Docker images in a registry are versioned, allowing you to manage different versions of an image over time.
+Images are often tagged with labels that represent specific versions, such as "latest" or a specific version number.
+Tagging helps identify and retrieve specific versions of images when deploying containers.
+Pulling and Pushing Images:
+
+To use an image from a registry, you need to "pull" it onto your local machine or a Docker host. This downloads the image from the registry.
+You can then "push" your own Docker images to a registry to make them available for others or for deployment on other machines.
+Pulling and pushing images is done using the Docker CLI (Command-Line Interface) commands, such as docker pull and docker push.
+Custom Registries:
+
+Besides Docker Hub, you can set up your own custom private registry using tools like Docker Registry or third-party solutions like AWS Elastic Container Registry (ECR) or Google Container Registry (GCR).
+Custom registries provide greater control over image distribution and can be integrated into your organization's infrastructure.
+In summary, a Docker registry is a central storage location for Docker images, offering both public and private repositories. It allows you to pull and push Docker images, manage versions, and share images with others. Docker Hub is a well-known public registry, and you can also set up private registries to store images within your organization.
