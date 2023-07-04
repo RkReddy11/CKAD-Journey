@@ -1,0 +1,57 @@
+Kubernetes Manual Scheduling refers to the process of manually assigning specific Pods to run on specific nodes within a Kubernetes cluster. Normally, Kubernetes automatically schedules Pods to appropriate nodes based on resource availability and scheduling algorithms. However, manual scheduling allows for more control and customization when it comes to assigning Pods to specific nodes. Let's dive into a simplified yet detailed explanation of manual scheduling in Kubernetes, along with examples and a diagram.
+
+Here are the key points to understand about manual scheduling:
+
+Node Selection: With manual scheduling, you can explicitly specify the node on which a Pod should run. This can be useful in certain scenarios, such as when you have specific hardware requirements or when you want to consolidate related Pods on the same node for performance reasons.
+
+Node Affinity: Kubernetes provides Node Affinity as a feature to influence the scheduling decisions made by the Kubernetes scheduler. Node Affinity allows you to define rules and constraints that influence Pod placement decisions based on node properties such as labels, node names, or other node attributes.
+
+Taints and Tolerations: Taints and tolerations are another mechanism to control Pod scheduling. A node can be "tainted" with specific constraints, and Pods can have "tolerations" that allow them to be scheduled on nodes with matching taints. By using taints and tolerations, you can control which Pods are allowed to run on specific nodes.
+
+Manual Scheduling Process: To manually schedule Pods, you need to specify the desired node in the Pod's specification. This can be done using the nodeName field in the Pod definition, which explicitly specifies the node's name where the Pod should run.
+
+Now, let's see an example and a diagram to better understand manual scheduling:
+
+Example:
+Suppose you have a Kubernetes cluster with three nodes: Node A, Node B, and Node C. You want to manually schedule a specific Pod, my-pod, to run on Node B. You can achieve this by setting the nodeName field in the Pod specification to the name of Node B.
+
+Pod YAML example:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  nodeName: node-b
+  containers:
+    - name: my-container
+      image: nginx:latest
+In this example, the nodeName field is set to "node-b", indicating that the Pod should run on Node B.
+
+Diagram:
+
+                  +-------------------------------------------+
+                  |                Kubernetes                  |
+                  |                Cluster                      |
+                  +-------------------------------------------+
+                                  |
+              +-------------------+-------------------+
+              |                   |                   |
+   +----------------+   +-----------------+   +-----------------+
+   |   Node: Node A  |   |   Node: Node B   |   |   Node: Node C   |
+   |                |   |                 |   |                 |
+   +----------------+   +-----------------+   +-----------------+
+              |                   |                   |
+   +----------------+   +-----------------+   +-----------------+
+   |     Pods       |   |    Pods         |   |     Pods        |
+   |                |   |                 |   |                 |
+   |    my-pod      |   |    my-pod       |   |                 |
+   |    (Node A)    |   |    (Node B)     |   |                 |
+   +----------------+   +-----------------+   +-----------------+
+
+In this diagram:
+
+The Kubernetes cluster is represented at the top.
+Each node within the cluster, Node A, Node B, and Node C, is depicted.
+The Pod my-pod is manually scheduled to run on Node B by setting the nodeName field in the Pod specification.
+It's important to note that manual scheduling should be used sparingly since it goes against the dynamic and flexible nature of Kubernetes. The default behavior of the Kubernetes scheduler is usually sufficient for most use cases.
