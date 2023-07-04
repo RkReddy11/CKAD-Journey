@@ -1,0 +1,59 @@
+In Kubernetes, Deployment strategies define how updates to a Deployment are applied to the running Pods. There are different strategies available to ensure a smooth transition and minimize downtime during updates. Let's explore the common Deployment strategies in a simplified yet detailed way, along with examples:
+
+Rolling Update: This is the default strategy used by Deployments. It gradually replaces old Pods with new ones, ensuring a smooth transition. The rolling update strategy follows these steps:
+
+Kubernetes creates new Pods with the updated configuration.
+The new Pods are gradually introduced while the old Pods are terminated one by one.
+This approach ensures that the desired number of Pods is maintained throughout the update process.
+You can control the rolling update behavior using parameters such as the maximum number of Pods that can be unavailable or the maximum number of Pods that can be created simultaneously.
+
+Example:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-container
+          image: nginx:latest
+Recreate: This strategy terminates all existing Pods before creating new ones. It is a simpler approach but can result in a brief downtime during the update process. The recreate strategy follows these steps:
+
+Kubernetes terminates all existing Pods.
+Once all old Pods are terminated, new Pods are created with the updated configuration.
+This approach results in a brief period where the application might be unavailable until the new Pods are up and running.
+
+
+Example:
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-container
+          image: nginx:latest
+It's important to note that the rolling update strategy is the default and recommended approach in most cases. It allows for updates to be applied gradually, minimizing disruptions and maintaining the desired number of replicas throughout the process.
+
+You can specify the desired strategy in the strategy section of the Deployment's YAML file. The type field can be set to either "RollingUpdate" or "Recreate," depending on the desired behavior.
