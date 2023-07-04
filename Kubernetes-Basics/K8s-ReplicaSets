@@ -49,3 +49,39 @@ Each replica of the frontend Pod is identical, running the same frontend contain
 If any of the Pods fail or are terminated, the ReplicaSet automatically creates a new Pod to replace it, ensuring that three replicas are always running.
 If you scale up the ReplicaSet to, say, five replicas, two more Pods would be created.
 ReplicaSets are often used in conjunction with other resources, such as Deployments, which provide additional features like rolling updates and version management.
+
+
+RS.yaml
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+
+
+The apiVersion is set to apps/v1, indicating the version of the Kubernetes API for ReplicaSets.
+The kind is set to ReplicaSet, specifying that we are defining a ReplicaSet.
+The metadata section contains the name of the ReplicaSet (my-replicaset).
+The spec section describes the desired state of the ReplicaSet, including:
+replicas: 3 indicates that the ReplicaSet should maintain three replicas of the Pod.
+The selector specifies the labels used to identify the Pods managed by the ReplicaSet. In this case, Pods with the label app: my-app will be managed.
+The template section defines the template for creating Pods. It includes:
+metadata with labels, specifying the labels to be applied to the Pods.
+spec for the Pod template, including details such as the container name (my-container), the container image (nginx:latest), and the container port (80).
+Once you have created this YAML file, you can apply it to a Kubernetes cluster using the kubectl apply -f <filename.yaml> command, and it will create the ReplicaSet with the specified number of replicas and Pod template.
+
