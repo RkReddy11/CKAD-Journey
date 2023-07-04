@@ -1,0 +1,69 @@
+Kubernetes Security Context refers to a set of parameters that allow you to configure the security settings and privileges of a pod or container within a Kubernetes cluster. It provides granular control over how containers are run and the level of access they have to the underlying resources. Here are some key aspects of Kubernetes Security Context:
+
+Pod Security Context: Pod Security Context allows you to set security-related configurations at the pod level. These configurations are applied to all containers within the pod unless overridden at the container level. Some common settings include:
+
+runAsUser: Specifies the user ID under which the containers should run.
+runAsGroup: Defines the group ID for the containers.
+fsGroup: Sets the group ID for the file system access within the containers.
+seLinuxOptions and supplementalGroups: Provide additional security settings related to SELinux and supplemental groups.
+
+Example:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  securityContext:
+    runAsUser: 1000
+    fsGroup: 2000
+  containers:
+    - name: my-container
+      image: my-image:latest
+Container Security Context: Container Security Context allows you to configure security settings at the individual container level, overriding the settings specified at the pod level. This provides flexibility to define different security requirements for different containers within the same pod. Some common settings include:
+
+runAsUser: Specifies the user ID under which the container should run.
+runAsGroup: Defines the group ID for the container.
+privileged: Determines whether the container has access to host resources.
+readOnlyRootFilesystem: Specifies if the container's root file system is read-only.
+capabilities: Manages the Linux capabilities available to the container.
+
+
+Example:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-container
+      image: my-image:latest
+      securityContext:
+        runAsUser: 1000
+        capabilities:
+          add: ["NET_ADMIN"]
+Pod and Container Network Policies: Network policies are used to control network traffic to and from pods. By specifying network policies, you can define rules to allow or deny communication between pods based on criteria such as IP addresses, ports, or labels. This adds an extra layer of security by restricting network access within the cluster.
+
+Example:
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: my-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: my-app
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              role: database
+Container Image Security: Ensuring the security of container images is essential to prevent potential vulnerabilities. Best practices include scanning container images for known vulnerabilities, using trusted and verified image registries, and regularly updating images to include the latest security patches.
+
+Example:
+
+Using image scanning tools like Trivy or Anchore to identify vulnerabilities.
+Configuring your container registry to enforce image signing and verification.
+These are some of the key aspects of Kubernetes Security Context. By utilizing these features, you can enhance the security of your Kubernetes workloads, control access to resources, and mitigate potential risks.
