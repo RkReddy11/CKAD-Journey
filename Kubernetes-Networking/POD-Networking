@@ -1,0 +1,20 @@
+In Kubernetes, pod networking refers to how pods are assigned IP addresses, how they communicate with each other, and how they access resources within and outside the cluster. Here's a simplified yet detailed explanation of Kubernetes pod networking:
+
+Pod IP Addresses: Each pod in a Kubernetes cluster is assigned a unique IP address. This IP address is internal to the cluster and allows the pod to send and receive network traffic. The IP address is typically assigned by the cluster's networking solution.
+
+Pod-to-Pod Communication: Pods within the same cluster can communicate with each other directly using their IP addresses. This means that one pod can send network requests to another pod using its IP address and the appropriate port. This direct communication enables pods to interact with each other within the same application or across different applications running in the cluster.
+
+Cluster Network Ranges: Kubernetes defines specific network ranges for pods and services within the cluster. The cluster administrator configures these ranges to ensure that IP addresses don't overlap with other networks. By default, Kubernetes uses the range 10.244.0.0/16 for pod IP addresses, but this can be configured differently based on the cluster setup.
+
+DNS Resolution: Kubernetes provides DNS-based service discovery for pods. Each pod is assigned a unique hostname based on its pod name and namespace. Other pods within the cluster can use the hostname to resolve the IP address of the destination pod. This allows pods to communicate with each other using meaningful names instead of relying solely on IP addresses.
+
+Container Network Interface (CNI): CNI is a plugin-based networking standard used by Kubernetes to enable communication between pods. Various CNI plugins, such as Calico, Flannel, or Cilium, handle pod networking by setting up virtual networks, managing IP allocation, and routing network traffic within the cluster. The chosen CNI plugin determines the specific implementation details of pod networking in a Kubernetes cluster.
+
+Examples:
+
+Pod A with IP address 10.244.0.2 can send requests to Pod B with IP address 10.244.0.3.
+Pod C with IP address 10.244.1.4 can communicate with Pod D with IP address 10.244.1.5.
+Pod E can access a database service using its hostname "db-service" and the appropriate port.
+In a Kubernetes cluster, pod networking is essential for enabling communication and connectivity between pods. It allows pods to work together as part of an application, exchange data, and access shared resources. The underlying CNI plugin handles the actual implementation of pod networking, ensuring that pods are assigned unique IP addresses and can communicate effectively within the cluster.
+
+It's worth noting that the specific configuration and behavior of pod networking may vary depending on the chosen CNI plugin and the cluster setup. Consult the documentation and resources provided by your CNI plugin for more detailed information on the configuration and functionality of pod networking in your Kubernetes cluster.
