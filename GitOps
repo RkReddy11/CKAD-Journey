@@ -1,0 +1,41 @@
+GitOps is an operational model and set of practices for managing and automating infrastructure and application deployments using Git as the single source of truth. It brings the benefits of version control and collaboration to the management of infrastructure and application configurations.
+
+Principles of GitOps:
+
+Infrastructure as Code (IaC):
+GitOps embraces the principle of Infrastructure as Code, where infrastructure components and configurations are defined and managed through code. Infrastructure definitions are stored in a version-controlled repository, allowing changes to be tracked, reviewed, and audited over time.
+
+Example: Using tools like Terraform or Kubernetes manifests stored in a Git repository to define and manage infrastructure resources such as virtual machines, networks, or Kubernetes clusters.
+
+Declarative Configuration:
+GitOps relies on declarative configuration, where the desired state of the system is defined in configuration files. These files describe the desired state of infrastructure and applications, and any changes made to these files trigger a reconciliation process to bring the system into the desired state.
+
+Example: Using Kubernetes YAML manifests that describe the desired state of pods, deployments, or services. When changes are made to these manifests and committed to Git, the GitOps tooling automatically applies the changes to the cluster to reconcile the desired state.
+
+Version Control:
+Git is the central version control system in GitOps. All configurations, infrastructure definitions, and application code are stored in a Git repository. Version control allows for tracking changes, managing branches, performing rollbacks, and collaborating on changes through pull requests.
+
+Example: Storing infrastructure manifests, application deployment configurations, and even the GitOps tooling configurations in a Git repository, such as GitHub or GitLab.
+
+Continuous Delivery and Automation:
+GitOps promotes continuous delivery and automation practices. Changes made to the Git repository trigger an automated deployment process. The GitOps tooling monitors the repository for changes, pulls the latest configurations, and applies them to the target environment automatically and consistently.
+
+Example: Whenever a change is pushed to the Git repository, the GitOps tooling automatically synchronizes the desired state with the actual state of the infrastructure or applications. This ensures that the system is always in the desired state, and any deviations are automatically corrected.
+
+Observability and Self-Healing:
+GitOps encourages observability and self-healing capabilities in the managed systems. By using GitOps, it becomes easier to track changes, perform audits, and gain visibility into the state of the system. Additionally, the GitOps tooling can continuously monitor the system and apply corrections or rollbacks if any deviations are detected.
+
+Example: Monitoring the Git repository for changes and triggering automated alerts or notifications when changes are made. Additionally, the GitOps tooling can automatically roll back to a known good state if an issue is detected.
+
+Benefits of GitOps:
+
+Consistency: GitOps ensures that the system is always in the desired state, as defined by the Git repository, promoting consistency across environments.
+Collaboration: By using Git as the source of truth, multiple team members can collaborate on infrastructure and application changes, reviewing and approving them through pull requests.
+Version Control: Git provides a history of changes, enabling rollbacks, auditing, and tracking of infrastructure and application configurations over time.
+Automation: GitOps automates the deployment process, reducing manual intervention and ensuring consistent and repeatable deployments.
+Observability: GitOps provides visibility into the system's state, allowing for monitoring, alerting, and self-healing capabilities.
+Overall, GitOps simplifies and streamlines infrastructure and application management by leveraging Git as the single source of truth and applying automation and version control principles. It brings traceability, collaboration, and reliability to the deployment process, making it easier to manage complex systems.
+
+Examples of popular GitOps tools include FluxCD, Argo CD, and Jenkins X, which integrate with Git repositories and provide automated deployment and reconciliation capabilities.
+
+Remember that the specific implementation and tooling may vary depending on the infrastructure and deployment targets, but the core principles of GitOps remain consistent.
