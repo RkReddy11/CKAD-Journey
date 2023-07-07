@@ -1,0 +1,51 @@
+Prometheus Overview:
+Prometheus is an open-source monitoring and alerting system designed for cloud-native environments. It collects and stores time-series metrics data, allowing you to monitor the health and performance of applications and infrastructure components.
+
+Prometheus Architecture:
+The Prometheus architecture consists of several key components that work together to collect, store, and analyze metrics. Here are the main components:
+
+Prometheus Server: At the core of the architecture is the Prometheus Server. It collects metrics data from various sources, evaluates alerting rules, and provides a web interface for querying and visualization.
+
+Metrics Sources/Exporters: Prometheus can scrape metrics data directly from applications or systems using exporters. Exporters act as bridges between Prometheus and the target systems, exposing metrics in a format that Prometheus can understand. Examples of exporters include the Node Exporter for host-level metrics and the Kubernetes Exporter for Kubernetes-specific metrics.
+
+Time-Series Database: Prometheus stores collected metrics in a time-series database. This database organizes metrics based on metric names, labels (key-value pairs), and timestamps. It allows efficient querying and retrieval of metrics over time.
+
+PromQL (Prometheus Query Language): PromQL is the query language used to retrieve and analyze metrics stored in Prometheus. It allows filtering, aggregating, and manipulating metrics data based on specific dimensions, such as labels, and time ranges.
+
+Alerting and Alertmanager: Prometheus supports defining alerting rules to generate alerts based on metric conditions. When an alert rule is triggered, Prometheus sends alerts to the Alertmanager. The Alertmanager handles notifications, routing alerts to the appropriate receivers such as email, Slack, or PagerDuty.
+
+Visualization Tools: While Prometheus has a basic built-in visualization interface, it is common to use external tools for advanced visualization. Grafana, for example, is a popular tool that integrates well with Prometheus and provides rich visualization capabilities for creating dashboards and graphs.
+
+Here is a simplified architecture diagram illustrating the components and data flow in Prometheus:
+
+
+                    ┌─────────────┐
+              ┌────►│  Exporter   │
+              │     └─────────────┘
+              │
+              │     ┌─────────────┐
+              │     │  Exporter   │
+              │     └─────────────┘
+              │
+┌───────────┐ │     ┌─────────────┐
+│   Target  ├─┼────►│  Exporter   │
+└───────────┘ │     └─────────────┘
+              │
+              │     ┌─────────────┐
+              └────►│ Prometheus  │◄───┐
+              │     └─────────────┘    │
+              │                        │
+              │     ┌─────────────┐    │
+              └────►│  Alerting   │◄───┘
+                    └─────────────┘
+                           ▲
+                           │
+                    ┌──────┴──────┐
+                    │             │
+                    ▼             ▼
+              ┌─────────────┐ ┌─────────────┐
+              │   Grafana   │ │   Alert     │
+              └─────────────┘ └─────────────┘
+
+This diagram shows the Prometheus server collecting metrics from various exporters, storing them in the time-series database, and handling alerting. Visualization tools like Grafana and external notification systems are connected to Prometheus to provide advanced visualization and alert notifications.
+
