@@ -1,0 +1,44 @@
+Prometheus metrics are numerical measurements that provide information about the behavior, performance, and health of systems and applications. These metrics represent specific aspects or characteristics of the monitored entities and are collected and stored by Prometheus for analysis, visualization, and alerting.
+
+Types of Prometheus Metrics:
+Prometheus defines four primary metric types:
+
+Counter: A counter is a monotonically increasing value that represents a cumulative count or total. Counters are typically used to measure events or occurrences that happen over time, such as the number of requests processed or the total number of errors encountered.
+
+Example:
+
+http_requests_total: Measures the total number of HTTP requests received.
+Gauge: A gauge is a metric with a numeric value that can increase or decrease arbitrarily over time. Gauges are suitable for measuring values that can fluctuate, such as the current temperature or the number of active connections.
+
+Example:
+
+cpu_usage_percentage: Represents the current CPU usage percentage.
+Histogram: A histogram is used to measure the distribution of values in a given set of observations or events. It counts the occurrences of values within predefined buckets or ranges. Histograms are useful for measuring response times, latencies, or request sizes.
+
+Example:
+
+http_request_duration_seconds: Captures the response time distribution of HTTP requests.
+Summary: Similar to a histogram, a summary also measures the distribution of values. However, instead of predefined buckets, it provides quantiles to summarize the data distribution. Summaries are useful for capturing percentiles and other statistical summaries.
+
+Example:
+
+http_request_duration_summary: Tracks the 50th, 90th, and 99th percentiles of HTTP request durations.
+Metric Labels and Dimensions:
+Prometheus allows the use of labels or dimensions to add additional metadata or dimensions to metrics. Labels provide context and allow for more detailed analysis and aggregation of metric data.
+
+Example:
+
+http_requests_total{method="GET", status="200"}: A counter metric labeled with the HTTP request method and response status.
+Exporting Prometheus Metrics:
+Prometheus metrics are exposed by applications or systems using a specific text-based format called the Prometheus exposition format. Applications can use client libraries or instrument their code to expose metrics in this format. Prometheus scrapes these metrics from the configured targets or exporters.
+
+Prometheus Metric Examples:
+Here are some examples of Prometheus metrics:
+
+http_requests_total{method="GET", status="200"} (Counter): Measures the total count of successful GET requests with a response status of 200.
+cpu_usage_percentage{instance="web-server-1"} (Gauge): Represents the current CPU usage percentage of a specific instance named "web-server-1".
+http_request_duration_seconds{route="/api/users", method="POST"} (Histogram): Tracks the distribution of response times for POST requests to the "/api/users" route.
+http_request_duration_summary{route="/api/users", method="POST"} (Summary): Provides quantiles (e.g., 50th, 90th, and 99th percentiles) of response times for POST requests to the "/api/users" route.
+These examples demonstrate how different Prometheus metric types and labels can be used to capture various aspects of system behavior, performance, and distribution.
+
+By collecting and analyzing Prometheus metrics, you can gain insights into the behavior and performance of your systems, troubleshoot issues, set alerts based on specific conditions, and make informed decisions for optimization and scalability.
