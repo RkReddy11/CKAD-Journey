@@ -1,0 +1,63 @@
+Kubernetes Network Policies allow you to define rules to control and secure network traffic between pods in a Kubernetes cluster. By specifying network policies, you can enforce communication policies at the pod level, allowing you to control which pods can communicate with each other based on various criteria such as IP addresses, ports, or labels. Here's a simplified yet detailed explanation of Kubernetes Network Policies:
+
+What are Network Policies? Network Policies are Kubernetes resources that define rules for inbound and outbound traffic to pods. They act as a firewall for pod-level network traffic within the cluster.
+
+Enforcing Communication Rules: Network Policies provide a way to enforce communication rules between pods. By default, all pods in a Kubernetes cluster can communicate with each other. However, with Network Policies, you can restrict or allow communication based on defined criteria.
+
+Network Policy Components: A Network Policy consists of the following components:
+
+Pod Selector: Specifies the pods to which the network policy applies. You can use labels to define the pod selector criteria.
+
+Ingress Rules: Define the incoming traffic rules. Ingress rules specify the sources (pods or IP blocks) from which the traffic is allowed and the ports or protocols allowed for communication.
+
+Egress Rules: Define the outgoing traffic rules. Egress rules specify the destinations (pods or IP blocks) to which the traffic is allowed and the ports or protocols allowed for communication.
+
+Policy Types: There are two policy types: "Ingress" and "Egress." You can define policies for both inbound and outbound traffic or choose to specify only one type.
+
+Network Policy Examples: Here are a few examples of how Network Policies can be defined:
+
+Deny All Traffic Except Whitelisted Pods: This policy blocks all traffic between pods except for specific whitelisted pods. It allows you to explicitly define which pods can communicate with each other.
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-policy
+spec:
+  podSelector: {}  # Applies to all pods
+  ingress:
+  - from:
+      podSelector:
+        matchLabels:
+          role: whitelisted
+
+Allow Traffic Based on Namespace: This policy allows pods within the same namespace to communicate with each other but blocks communication from pods in different namespaces.
+
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-same-namespace-policy
+spec:
+  podSelector: {}  # Applies to all pods
+  ingress:
+  - from:
+      namespaceSelector:
+        matchLabels:
+          name: my-namespace
+
+
+Allow Traffic Based on IP Block: This policy allows traffic only from a specific IP block to reach the pods.
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ip-block-policy
+spec:
+  podSelector: {}  # Applies to all pods
+  ingress:
+  - from:
+      ipBlock:
+        cidr: 10.0.0.0/24
+Policy Enforcement: Kubernetes network plugins, such as Calico, Cilium, or Azure CNI, are responsible for implementing and enforcing network policies in the cluster. These plugins intercept network traffic and apply the configured network policies to enforce the defined communication rules.
+
+By utilizing Kubernetes Network Policies, you can establish fine-grained control over network traffic between pods in your cluster, thereby enhancing security and isolation. It's important to note that not all Kubernetes network plugins support Network Policies, so you need to ensure that your cluster is configured with a compatible network plugin that supports this feature.

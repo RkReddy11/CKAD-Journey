@@ -1,0 +1,17 @@
+Imagine you have a big playground with different games and activities. To enter the playground, you need to go through a gate, right? The gate is like the entrance point to the playground. In the world of Kubernetes, we have something similar called "Ingress."
+
+In Kubernetes, Ingress acts as a gate or entrance point to your applications running in the cluster. It allows you to define rules or instructions on how to access your applications from the outside world. Just like different games or activities have different entrances in the playground, each application can have its own Ingress to control how it's accessed.
+
+Let's break it down further with an example:
+
+Imagine you have a game called "Basketball" in your playground, and you want your friends to play it. To let them know how to access the game, you put up a sign with instructions. The sign tells them to go to a specific entrance gate and follow some rules to play.
+
+In Kubernetes, you have an application running in your cluster, like a website or an API. To let people access your application, you create an Ingress object. This Ingress object is like your sign with instructions.
+
+The Ingress object has rules or instructions on how to reach your application. It specifies things like the domain name or URL path that should be used to access your application. It also defines which backend service or pod should handle the incoming traffic.
+
+Just like your friends follow the sign's instructions to reach the basketball game, when someone wants to access your application, they follow the rules specified in the Ingress object. They use the specified domain name or URL path to reach your application, and the Ingress routes the traffic to the correct backend service or pod.
+
+So, in simple terms, Kubernetes Ingress is like a sign with instructions that tells people how to access your applications in the cluster. It helps route the incoming traffic to the right place, just like a gate or entrance point in a playground.
+
+Remember, this is a simplified explanation, but I hope it helps you understand the concept of Kubernetes Ingress!

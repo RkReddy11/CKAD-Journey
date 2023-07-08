@@ -1,0 +1,30 @@
+In Kubernetes, API Groups are a way to categorize and manage related resources in the Kubernetes API. They provide a mechanism to organize resources into logical groups, making it easier to discover, access, and manage those resources. Each API Group is identified by a unique name and has its own set of resources and endpoints within the Kubernetes API. Let's explore the different API Groups and their associated resources in more detail:
+
+Core API Group (/api):
+
+The Core API Group is the fundamental API Group in Kubernetes and doesn't have a group name in its API endpoint.
+It includes the core Kubernetes resources, such as pods, services, namespaces, nodes, events, and persistent volumes.
+The resources in the Core API Group are accessed using the /api/v1/ endpoint.
+Named API Groups (/apis/{group}/{version}):
+
+Named API Groups are additional API Groups in Kubernetes that extend the functionality provided by the Core API Group.
+Each Named API Group has its own group name and version.
+Some popular Named API Groups and their associated resources include:
+apps: This group manages higher-level deployments and stateful sets.
+Resources: deployments, replica sets, stateful sets, daemon sets.
+batch: This group handles batch processing tasks.
+Resources: jobs, cron jobs.
+autoscaling: This group manages automatic scaling of resources.
+Resources: horizontal pod autoscalers, vertical pod autoscalers.
+networking.k8s.io: This group manages networking resources.
+Resources: ingresses, network policies.
+storage.k8s.io: This group handles storage-related resources.
+Resources: storage classes, persistent volume claims, volume snapshots.
+Third-Party API Groups (/apis/{group}/{version}):
+
+Third-Party API Groups are additional API Groups created by third-party developers or custom controllers.
+They allow extending Kubernetes with custom resources and controllers specific to a particular application or use case.
+Third-Party API Groups have their own unique group names and versions, defined by the developers.
+Each API Group has its own set of resources that can be created, read, updated, or deleted using the corresponding API endpoints. These resources are defined in the Kubernetes API specifications and can be managed using tools like kubectl or programmatically through the Kubernetes client libraries.
+
+It's important to note that API Groups and their associated resources are not fixed and can evolve as Kubernetes continues to develop. New API Groups and resources may be added in future releases to provide additional functionality and capabilities.

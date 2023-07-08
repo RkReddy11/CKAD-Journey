@@ -1,0 +1,70 @@
+Kubernetes DaemonSet is a Kubernetes resource that ensures that a specific Pod is scheduled and running on every node within a cluster. DaemonSets are primarily used to run system daemons or background tasks that need to be present on all nodes. Let's explore Kubernetes DaemonSet in a simplified yet detailed way, including examples and a diagram.
+
+Here are the key points to understand about DaemonSet:
+
+Pod Placement:
+
+DaemonSets ensure that a copy of a specific Pod is created and scheduled on every node in the cluster.
+Each node in the cluster will have its own instance of the Pod managed by the DaemonSet.
+If a new node is added to the cluster, the DaemonSet automatically creates and schedules the required Pod on that node.
+If a node is removed from the cluster, the DaemonSet terminates the associated Pod on that node.
+Use Cases:
+
+Running cluster-wide system daemons: DaemonSets are commonly used to deploy cluster-wide services or daemons that need to be present on every node, such as log collectors, monitoring agents, or network proxies.
+Running background tasks: DaemonSets can also be used to schedule and manage background tasks that need to run on all nodes, such as periodic data backups or cleanup processes.
+Pod Template:
+
+DaemonSets define a Pod template that serves as a blueprint for creating and scheduling Pods on each node.
+The template specifies the Pod's specification, including the container image, resource requirements, environment variables, and other configuration options.
+
+Example:
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: my-image:latest
+In this example, a DaemonSet named "my-daemonset" is defined.
+
+The selector specifies that Pods managed by this DaemonSet should have the label app: my-app.
+The template defines the Pod specification with a single container named "my-container" using the "my-image:latest" image.
+
+Diagram:
+
+   +------------------------------------------+
+   |             Kubernetes Cluster           |
+   +------------------------------------------+
+   |                                          |
+   |                                          |
+   |                   +----------------------+------------------------+
+   |                   |                      |                        |
+   |     +------------------+       +------------------+     +------------------+
+   |     |     Node A       |       |     Node B       |     |     Node C       |
+   |     |                  |       |                  |     |                  |
+   |     |   +--------------+---+   |  +---------------+--+  | +---------------+|
+   |     |   |      Pod         |   |  |      Pod         |  |  |      Pod         ||
+   |     |   |   (DaemonSet)    |   |  |   (DaemonSet)    |  |  |   (DaemonSet)    ||
+   |     |   +-----------------+   |  +------------------+  |  +-----------------+|
+   |     |                  |       |                  |     |                  |
+   |     +------------------+       +------------------+     +------------------+
+   |                                          |
+   |                                          |
+   +------------------------------------------+
+
+In this diagram:
+
+The Kubernetes cluster is represented at the top.
+Nodes within the cluster are depicted, with Node A, Node B, and Node C.
+Pods managed by the DaemonSet are shown on each node, ensuring that a copy of the specified Pod is scheduled and running on every node.
+DaemonSets guarantee that specific Pods are running on each node, making them useful for running system-level tasks or background processes across the cluster

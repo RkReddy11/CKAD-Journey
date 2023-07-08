@@ -1,0 +1,39 @@
+The kubectl apply command is a powerful and commonly used command in Kubernetes that allows you to create or update Kubernetes resources using a declarative approach. It simplifies the management of resources by comparing the desired state defined in a manifest file with the current state in the cluster and making the necessary changes to achieve the desired state. Let's break down the kubectl apply command in a simplified yet detailed way, along with examples:
+
+Basic Syntax:
+The basic syntax of the kubectl apply command is as follows:
+
+
+kubectl apply -f <filename.yaml>
+
+Here's a detailed explanation of each part:
+
+kubectl: This is the command-line tool used to interact with Kubernetes clusters.
+apply: This subcommand is used to create or update resources based on the provided manifest file.
+-f <filename.yaml>: This flag specifies the filename or URL of the manifest file that describes the desired state of the resource(s).
+Creating Resources:
+When you apply a manifest file for the first time, Kubernetes creates the specified resource(s) in the cluster. For example, let's say you have a YAML file named my-pod.yaml that describes a Pod resource. You can create the Pod in the cluster using the following command:
+
+kubectl apply -f my-pod.yaml
+
+Updating Resources:
+If a resource already exists in the cluster and you apply a manifest file that describes changes to that resource, Kubernetes will update the resource to match the desired state specified in the manifest. The update can include changes to fields such as container images, replicas, labels, etc. For example, if you want to update a Deployment named my-deployment using a modified manifest file named my-deployment.yaml, you can use the following command:
+
+kubectl apply -f my-deployment.yaml
+
+Updating Resources with Configuration Changes:
+When updating a resource, you can make configuration changes by editing the manifest file directly and then applying the updated file. Kubernetes will detect the changes and update the resource accordingly. For example, if you want to update the number of replicas for a Deployment, you can edit the replicas field in the manifest file and then apply the updated file using kubectl apply.
+
+Applying Multiple Manifest Files:
+You can apply multiple manifest files at once by specifying multiple -f flags followed by the filenames. For example:
+
+kubectl apply -f file1.yaml -f file2.yaml
+
+This allows you to create or update multiple resources simultaneously.
+
+Applying from Directories:
+You can also apply all the manifest files in a directory by specifying the directory path instead of a specific file. For example:
+
+kubectl apply -f my-directory/
+
+Kubernetes will apply all the manifest files found in the specified directory

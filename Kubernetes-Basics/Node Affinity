@@ -1,0 +1,78 @@
+Kubernetes Node Affinity is a feature that allows you to define rules and constraints for Pod scheduling based on the characteristics of nodes within a Kubernetes cluster. Node affinity enables you to influence the placement of Pods on specific nodes that satisfy certain conditions. Let's explore Node Affinity in a simplified yet detailed way, including examples and a diagram.
+
+Here are the key points to understand about Node Affinity:
+
+Labels on Nodes:
+
+Labels are key-value pairs assigned to nodes within a Kubernetes cluster.
+Nodes can be labeled with various attributes, such as hardware capabilities, availability zones, or any other characteristics.
+Labels on nodes are defined during node creation or can be added/modified later.
+Node Affinity in Pod Specification:
+
+To utilize node affinity, you need to specify node affinity rules in the Pod's specification.
+Node affinity rules define requirements and preferences for the nodes on which Pods should be scheduled.
+Node affinity can be specified using two types of rules: requiredDuringSchedulingIgnoredDuringExecution and preferredDuringSchedulingIgnoredDuringExecution.
+
+Example:
+
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                  - ssd
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+              - key: region
+                operator: In
+                values:
+                  - us-west
+In this example, the Pod has node affinity rules set:
+
+A required rule specifies that the Pod should be scheduled on nodes with the label disktype=ssd.
+A preferred rule indicates a preference for nodes with the label region=us-west but is not mandatory.
+Pod Scheduling Behavior:
+
+When a Pod is scheduled, the Kubernetes scheduler evaluates the node affinity rules.
+Required rules must be satisfied for a Pod to be scheduled on a node.
+Preferred rules are considered, and the scheduler attempts to schedule the Pod on nodes that satisfy them but is not guaranteed.
+Pods without matching node affinity rules will remain unscheduled until suitable nodes become available.
+
+Diagram:
+
+
+                  +----------------------------------------------+
+                  |                 Kubernetes                   |
+                  |                 Cluster                      |
+                  +----------------------------------------------+
+                                  |
+               +------------------+------------------+
+               |                 |                 |
+  +------------------+   +------------------+   +------------------+
+  |   Nodes          |   |   Nodes          |   |   Nodes          |
+  |                  |   |                  |   |                  |
+  |   Label: disktype=ssd  |   Label: region=us-west  |   Label: gpu=true |
+  +------------------+   +------------------+   +------------------+
+               |                 |                 |
+   +----------------+    +-----------------+    +-----------------+
+   |     Pods       |    |     Pods        |    |     Pods        |
+   |                |    |                 |    |                 |
+   |  Node Affinity:|    |  Node Affinity: |    |  Node Affinity: |
+   |  required: disktype=ssd  |  preferred: region=us-west|     None       |
+   +----------------+    +-----------------+    +-----------------+
+
+In this diagram:
+
+The Kubernetes cluster is represented at the top.
+Nodes within the cluster are depicted, each labeled with different attributes.
+Pods with corresponding node affinity rules are shown, indicating the requirements and preferences for node selection during scheduling.
+The first Pod has a required node affinity rule, specifying that it should be scheduled on nodes with the label disktype=ssd.
+The second Pod has a preferred node affinity rule, expressing a preference for nodes with the label region=us-west.
+The third Pod does not have any node affinity rules, allowing it to be scheduled on any node.
+Node affinity enables you to control the placement of Pods based on node attributes, ensuring that Pods are scheduled on nodes that satisfy specific requirements or preferences.

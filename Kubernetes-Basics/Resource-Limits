@@ -1,0 +1,66 @@
+Kubernetes Resource Limits allow you to define constraints on the amount of CPU and memory resources that a Pod or container can use within a Kubernetes cluster. Resource limits ensure that Pods or containers do not consume excessive resources, leading to resource starvation or performance issues. Let's explore Kubernetes Resource Limits in a simplified yet detailed way, including examples and a diagram.
+
+Here are the key points to understand about Resource Limits:
+
+Resource Requests vs. Resource Limits:
+
+Kubernetes distinguishes between resource requests and resource limits.
+Resource requests represent the minimum amount of resources that a Pod or container requires to run.
+Resource limits define the maximum amount of resources that a Pod or container can consume.
+Specifying Resource Limits:
+
+Resource limits can be defined at both the Pod level and the container level.
+At the Pod level, you can set resource limits that apply to all containers within the Pod.
+At the container level, you can set individual resource limits for each container within the Pod.
+Resource limits are specified in terms of CPU units (e.g., millicores) and memory units (e.g., bytes, kilobytes, megabytes, or gigabytes).
+
+Example:
+
+
+spec:
+  containers:
+  - name: my-container
+    resources:
+      limits:
+        cpu: "1"
+        memory: "1Gi"
+In this example, the resource limits are set to 1 CPU unit (1 core) and 1 gigabyte of memory for the container named "my-container" within the Pod.
+
+Pod Scheduling Considerations:
+
+When scheduling Pods, Kubernetes takes into account the resource requests and limits specified.
+Kubernetes tries to ensure that nodes have enough available resources to satisfy the resource requests of Pods.
+Resource limits help prevent Pods from overconsuming resources and impacting the performance and stability of other Pods running on the same node.
+
+Diagram:
+
+                   +----------------------------------------+
+                   |               Kubernetes               |
+                   |               Cluster                  |
+                   +----------------------------------------+
+                                  |
+               +------------------+------------------+
+               |                 |                 |
+  +------------------+   +------------------+   +------------------+
+  |   Nodes          |   |   Nodes          |   |   Nodes          |
+  |                  |   |                  |   |                  |
+  |   (Resources:     |   (Resources:     |   (Resources:     |
+  |    CPU: 4 cores,  |    CPU: 2 cores,  |    CPU: 8 cores,  |
+  |    Memory: 8GB)   |    Memory: 4GB)   |    Memory: 16GB)  |
+  +------------------+   +------------------+   +------------------+
+               |                 |                 |
+   +----------------+    +-----------------+    +-----------------+
+   |     Pods       |    |     Pods        |    |     Pods        |
+   |                |    |                 |    |                 |
+   |  (Resource     |    |  (Resource      |    |  (Resource      |
+   |   Limits:      |    |   Limits:       |    |   Limits:       |
+   |   CPU: 2 cores,|    |   CPU: 1 core,  |    |   CPU: 4 cores, |
+   |   Memory: 4GB) |    |   Memory: 2GB)  |    |   Memory: 8GB)  |
+   +----------------+    +-----------------+    +-----------------+
+
+In this diagram:
+
+The Kubernetes cluster is represented at the top.
+Nodes within the cluster are depicted, each with its available resources (CPU and memory).
+Pods are shown running on the nodes, each with its specified resource limits.
+Resource limits help ensure that Pods or containers do not consume more resources than allocated, preventing resource starvation and maintaining performance and stability within the cluster.

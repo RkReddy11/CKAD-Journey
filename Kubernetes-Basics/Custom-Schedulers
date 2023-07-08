@@ -1,0 +1,58 @@
+Kubernetes Custom Scheduler is a mechanism that allows you to deploy and use your own custom scheduler instead of the default Kubernetes scheduler. The custom scheduler provides advanced scheduling capabilities and allows you to define your own scheduling policies and logic based on your specific requirements. Let's explore Kubernetes Custom Scheduler in a simplified yet detailed way, including examples and a diagram.
+
+Here are the key points to understand about the Kubernetes Custom Scheduler:
+
+Custom Scheduler Deployment:
+
+To deploy a custom scheduler, you need to create a new Kubernetes scheduler component and configure it to run as a separate process or container.
+The custom scheduler can be deployed as a standalone service or as part of a Kubernetes controller manager component.
+You can deploy the custom scheduler in the same Kubernetes cluster or on a separate machine or virtual machine.
+Custom Scheduling Logic:
+
+The custom scheduler allows you to define your own scheduling logic based on your specific requirements.
+You can implement custom scheduling policies and rules to determine where Pods should be scheduled, taking into account factors such as resource availability, node affinity, pod affinity, or anti-affinity rules, and other custom criteria.
+The custom scheduler can make scheduling decisions based on various attributes and metadata associated with the Pods, such as labels, annotations, or resource requirements.
+Integration with Kubernetes API Server:
+
+The custom scheduler interacts with the Kubernetes API server to receive scheduling requests and update the status of scheduled Pods.
+It receives scheduling events from the API server, including new Pod creation requests or rescheduling requests.
+The custom scheduler examines the scheduling requirements, applies its custom logic, and makes scheduling decisions.
+Once a scheduling decision is made, the custom scheduler updates the API server with the selected node for the Pod.
+Example Custom Scheduler:
+
+One popular example of a custom scheduler is the kube-scheduler-extender project. It provides an extension mechanism for the default Kubernetes scheduler, allowing you to define custom scheduling rules and logic.
+This custom scheduler can be deployed as a separate component and integrated with the Kubernetes scheduler.
+
+Diagram:
+
+
+   +-------------------------------------------------+
+   |               Kubernetes Cluster                |
+   +-------------------------------------------------+
+   |                                                 |
+   |                 +----------------+                |
+   |                 |                |                |
+   |     +-------------------+    +----------------+  |
+   |     |   Kubernetes    |    |   Custom       |  |
+   |     |   API Server    |    |   Scheduler    |  |
+   |     +-------------------+    +----------------+  |
+   |                 |                |                |
+   |                 +----------------+                |
+   |                                                 |
+   |               +--------------+                    |
+   |               |              |                    |
+   |     +-------------------+  |                    |
+   |     |   kubelet         |  |                    |
+   |     +-------------------+  |                    |
+   |               |              |                    |
+   |               +--------------+                    |
+   |                                                 |
+   +-------------------------------------------------+
+
+In this diagram:
+
+The Kubernetes cluster is represented at the top.
+The Kubernetes API server and the custom scheduler are shown as separate components.
+The custom scheduler interacts with the API server to receive scheduling requests and make scheduling decisions.
+The kubelet on each node communicates with the custom scheduler to receive scheduling decisions and run the Pods accordingly.
+The custom scheduler allows you to implement your own custom scheduling logic and policies, providing flexibility in scheduling Pods based on your specific requirements.

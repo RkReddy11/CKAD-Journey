@@ -1,0 +1,58 @@
+Kubernetes Node Selectors allow you to specify a set of criteria for Pod scheduling based on labels assigned to nodes within a Kubernetes cluster. By using node selectors, you can ensure that Pods are scheduled only on nodes that meet specific requirements. Let's explore Node Selectors in a simplified yet detailed way, including examples and a diagram.
+
+Here are the key points to understand about Node Selectors:
+
+Labels on Nodes:
+
+Labels are key-value pairs attached to nodes within a Kubernetes cluster.
+Nodes can be labeled with various attributes, such as hardware capabilities, availability zones, or any other characteristics.
+Labels on nodes are defined during node creation or can be added/modified later.
+Node Selector in Pod Specification:
+
+To utilize node selectors, you need to specify a node selector in the Pod's specification.
+A node selector consists of one or more key-value pairs that match the labels assigned to nodes.
+Pods with a node selector will only be scheduled on nodes that have labels matching the specified criteria.
+
+Example:
+
+
+spec:
+  nodeSelector:
+    disktype: ssd
+    region: us-west
+In this example, the Pod is configured to be scheduled on nodes labeled with disktype=ssd and region=us-west.
+
+Pod Scheduling Behavior:
+
+If a Pod has a node selector defined, the Kubernetes scheduler will consider only the nodes that match the selector criteria during scheduling.
+Pods without a matching node selector will remain unscheduled until suitable nodes become available.
+
+Diagram:
+
+                  +---------------------------------------------+
+                  |               Kubernetes                    |
+                  |               Cluster                        |
+                  +---------------------------------------------+
+                                  |
+               +------------------+------------------+
+               |                 |                 |
+  +------------------+   +------------------+   +------------------+
+  |   Nodes          |   |   Nodes          |   |   Nodes          |
+  |                  |   |                  |   |                  |
+  |   Label: disktype=ssd  |   Label: region=us-west  |   Label: gpu=true |
+  +------------------+   +------------------+   +------------------+
+               |                 |                 |
+   +----------------+    +-----------------+    +-----------------+
+   |     Pods       |    |     Pods        |    |     Pods        |
+   |                |    |                 |    |                 |
+   |  Node Selector:|    |  Node Selector: |    |  Node Selector: |
+   |  disktype=ssd  |    |  region=us-west |    |  gpu=true       |
+   +----------------+    +-----------------+    +-----------------+
+
+In this diagram:
+
+The Kubernetes cluster is represented at the top.
+Nodes within the cluster are depicted, each labeled with different attributes.
+Pods with corresponding node selectors are shown, indicating the criteria for node selection.
+Only nodes that match the node selector criteria will be considered for scheduling Pods.
+Node selectors allow for fine-grained control over Pod scheduling, ensuring that Pods are placed on nodes that meet specific requirements or constraints.
